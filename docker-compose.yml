@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - SMTP_SERVER=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_EMAIL=${SMTP_EMAIL}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - ADMIN_ALERT_EMAIL=bharathramu35@gmail.com
+      - DB_PATH=data/security_logs.db
+    volumes:
+      - ./backend/data:/app/data # Mount for SQLite database persistence
