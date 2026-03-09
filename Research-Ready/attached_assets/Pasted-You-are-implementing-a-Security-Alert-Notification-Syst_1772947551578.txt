@@ -1,0 +1,253 @@
+You are implementing a **Security Alert Notification System** for a behavioral biometric banking authentication platform.
+
+The task is to build a **backend email alert module that automatically sends a notification when suspicious authentication behavior is detected**.
+
+The system must run inside **Docker containers** and integrate with a FastAPI backend.
+
+---
+
+# OBJECTIVE
+
+Create a **real-time silent email alert system** that sends a notification to the administrator whenever abnormal authentication behavior is detected.
+
+The alert must be triggered automatically by the backend.
+
+The frontend user interface must **not display any indication that the alert was sent**.
+
+This is a **silent security alert system**.
+
+---
+
+# ALERT TRIGGER CONDITIONS
+
+The alert must trigger when:
+
+risk_score ≥ 60
+
+or when the system classification is:
+
+SUSPICIOUS BEHAVIOR
+HIGH RISK AUTHENTICATION
+CONFIRMED DURESS ATTACK
+
+---
+
+# EMAIL RECIPIENT
+
+All alerts must be sent to:
+
+[bharathramu35@gmail.com](mailto:bharathramu35@gmail.com)
+
+---
+
+# EMAIL CONTENT
+
+The alert email must include:
+
+Username
+Timestamp
+Risk Score
+Risk Classification
+Typing Anomaly Score
+Mouse Behavior Score
+Facial Stress Score
+IP Address
+Device Information
+Browser User Agent
+
+---
+
+# EMAIL SUBJECT
+
+SECURITY ALERT: Suspicious Authentication Behavior Detected
+
+---
+
+# EMAIL BODY FORMAT
+
+Example email content:
+
+A suspicious authentication attempt has been detected.
+
+User: {username}
+
+Risk Score: {risk_score}
+
+Classification: {risk_level}
+
+Typing Anomaly Score: {typing_score}
+
+Mouse Behavior Score: {mouse_score}
+
+Facial Stress Score: {face_score}
+
+IP Address: {ip_address}
+
+Device: {device_info}
+
+Browser: {user_agent}
+
+Timestamp: {timestamp}
+
+Immediate investigation is recommended.
+
+---
+
+# IMPLEMENTATION REQUIREMENTS
+
+Create a Python module named:
+
+email_alert_service.py
+
+The service must use:
+
+smtplib
+email.mime.text
+email.mime.multipart
+
+The email must be sent using **SMTP with TLS encryption**.
+
+The alert system must run **asynchronously using FastAPI BackgroundTasks** so it does not block authentication requests.
+
+---
+
+# ENVIRONMENT VARIABLES
+
+The application must use environment variables for credentials.
+
+SMTP_SERVER
+SMTP_PORT
+SMTP_EMAIL
+SMTP_PASSWORD
+ADMIN_ALERT_EMAIL
+
+Example:
+
+SMTP_SERVER=smtp.gmail.com
+SMTP_PORT=587
+SMTP_EMAIL=[your_email@gmail.com](mailto:your_email@gmail.com)
+SMTP_PASSWORD=your_app_password
+ADMIN_ALERT_EMAIL=[bharathramu35@gmail.com](mailto:bharathramu35@gmail.com)
+
+---
+
+# EMAIL ALERT FUNCTION
+
+Create a function:
+
+send_security_alert(user_data)
+
+Responsibilities:
+
+1. Construct email subject and body
+2. Connect to SMTP server
+3. Authenticate securely
+4. Send alert email
+5. Close connection
+6. Log alert event
+
+The function must accept a dictionary:
+
+user_data = {
+"username": "",
+"risk_score": "",
+"classification": "",
+"typing_score": "",
+"mouse_score": "",
+"face_score": "",
+"ip_address": "",
+"device_info": "",
+"user_agent": "",
+"timestamp": ""
+}
+
+---
+
+# FASTAPI INTEGRATION
+
+Integrate the alert system with the authentication pipeline.
+
+Example flow:
+
+If risk_score ≥ 60:
+
+trigger background task:
+
+background_tasks.add_task(send_security_alert, user_data)
+
+The login response must **not wait for the email to be sent**.
+
+---
+
+# SECURITY LOGGING
+
+Every alert must be recorded in the database.
+
+Create table:
+
+security_alert_logs
+
+Fields:
+
+timestamp
+username
+risk_score
+classification
+ip_address
+device_info
+
+---
+
+# DOCKER SUPPORT
+
+Create a Dockerized environment.
+
+Provide:
+
+Dockerfile
+
+Example:
+
+FROM python:3.11
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD ["uvicorn","main:app","--host","0.0.0.0","--port","8000"]
+
+---
+
+Create docker-compose.yml
+
+Services:
+
+backend:
+build: .
+ports:
+- "8000:8000"
+environment:
+- SMTP_SERVER=smtp.gmail.com
+- SMTP_PORT=587
+- SMTP_EMAIL=${SMTP_EMAIL}
+- SMTP_PASSWORD=${SMTP_PASSWORD}
+- ADMIN_ALERT_EMAIL=[bharathramu35@gmail.com](mailto:bharathramu35@gmail.com)
+
+---
+
+# OUTPUT
+
+Generate complete implementation including:
+
+email_alert_service.py
+FastAPI integration example
+SMTP configuration
+environment variable handling
+Dockerfile
+docker-compose.yml
+
+The alert module must be **production-ready and containerized**.

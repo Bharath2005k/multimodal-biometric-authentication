@@ -1,0 +1,294 @@
+Build an enterprise-grade, research-ready, production-level full-stack system titled:
+
+"Adaptive Intent-Aware Multimodal Behavioral Biometric Authentication Framework with Real-Time Duress Detection and Continuous Risk Scoring for Secure Financial Systems"
+
+This system must be architected as a scalable, modular, security-first fintech platform suitable for:
+
+• IEEE publication
+• Cloud deployment
+• Real-time inference
+• Adversarial robustness evaluation
+• Continuous authentication beyond login
+
+──────────────────────────────
+TECH STACK (STRICT)
+──────────────────────────────
+
+Frontend:
+- React (Vite + TypeScript)
+- TailwindCSS (fintech theme)
+- Recharts + D3.js (behavioral visualization)
+- Web Workers for high-frequency event capture
+
+Backend:
+- FastAPI (async architecture)
+- SQLAlchemy ORM
+- PostgreSQL (ACID-compliant)
+- Redis (session + rate limiting)
+- Celery (background ML tasks)
+- JWT authentication (OAuth2 compatible)
+
+Machine Learning:
+- TensorFlow (LSTM + Attention layer)
+- Scikit-learn (RandomForest, XGBoost)
+- SHAP for Explainable AI
+- PCA for dimensionality reduction
+- Optuna for hyperparameter tuning
+
+Security:
+- Argon2 password hashing
+- Rate limiting
+- CORS security
+- Input validation
+- SQL injection prevention
+- Role-based access control (RBAC)
+- TLS-ready structure
+
+Deployment:
+- Dockerized services
+- .env configuration
+- Production-ready folder structure
+- Gunicorn/Uvicorn config
+
+──────────────────────────────
+SYSTEM ARCHITECTURE REQUIREMENTS
+──────────────────────────────
+
+Design a microservice-ready modular architecture:
+
+/backend
+   /app
+       main.py
+       config.py
+       database.py
+       auth.py
+       security.py
+       rate_limiter.py
+       schemas.py
+       models.py
+       feature_engineering.py
+       behavioral_stream_processor.py
+       keystroke_lstm_model.py
+       mouse_model.py
+       fusion_engine.py
+       risk_engine.py
+       explainability.py
+       drift_detection.py
+       alert_service.py
+       evaluation_metrics.py
+   requirements.txt
+   Dockerfile
+
+/frontend
+   /src
+       /components
+       /pages
+       /services
+       /hooks
+       /visualization
+       behavioralCapture.ts
+       riskDashboard.tsx
+   package.json
+
+──────────────────────────────
+FRONTEND REQUIREMENTS
+──────────────────────────────
+
+Create a banking-grade login + continuous monitoring interface.
+
+Capture high-resolution behavioral signals:
+
+Keystroke:
+- keyDown timestamp
+- keyUp timestamp
+- dwell time
+- flight time
+- digraph latency
+- trigraph sequence timing
+- typing entropy
+- backspace frequency
+- typing acceleration
+
+Mouse:
+- x,y coordinates
+- velocity
+- acceleration
+- jerk
+- curvature
+- angular variance
+- micro-jitter
+- pause duration
+- click pressure proxy
+
+Continuous Monitoring:
+- Capture behavior during dashboard navigation
+- Compute rolling risk score every 3 seconds
+
+Send behavioral stream via secure API in JSON format.
+
+Implement:
+- Risk gauge (real-time updating)
+- Behavioral anomaly heatmap
+- Temporal deviation graph
+- Admin analytics dashboard
+- Hidden silent-alert flag system
+
+──────────────────────────────
+BACKEND REQUIREMENTS
+──────────────────────────────
+
+1) /collect-session
+Accept high-frequency behavioral streams.
+
+2) Real-Time Feature Engineering
+Compute:
+- Mean dwell
+- Std dwell
+- Flight time variance
+- Typing rhythm entropy
+- Velocity distribution
+- Acceleration variance
+- Direction change frequency
+- Jerk metric
+- Hesitation index
+- Behavioral deviation score vs baseline
+
+3) Machine Learning
+
+Keystroke Model:
+- LSTM + Attention mechanism
+- Input shape: (timesteps, feature_dim)
+- Binary classification
+
+Mouse Model:
+- RandomForest or XGBoost
+
+Fusion:
+- Late fusion weighted risk aggregation
+- Adaptive weighting based on model confidence
+
+final_risk = dynamic_weight_k * lstm_prob + dynamic_weight_m * rf_prob
+
+4) Risk Engine
+Classify:
+0–40 → Normal
+40–70 → Elevated Risk
+70–85 → Duress
+>85 → Forced / Reject
+
+5) Silent Alert Logic
+If risk > 70:
+   - Insert alert in database
+   - Flag session
+   - Restrict transaction endpoints
+   - Trigger admin notification service
+
+6) Continuous Authentication
+Re-evaluate behavior every 3 seconds.
+Invalidate JWT if risk > threshold.
+
+──────────────────────────────
+DATABASE (PostgreSQL)
+──────────────────────────────
+
+Tables:
+- users
+- behavioral_sessions
+- real_time_risk_scores
+- extracted_features
+- model_predictions
+- alerts
+- audit_logs
+- model_performance
+
+Include:
+- Proper indexing
+- Foreign keys
+- ACID compliance
+- Encrypted sensitive fields
+
+──────────────────────────────
+MODEL TRAINING PIPELINE
+──────────────────────────────
+
+Implement:
+
+- Train/test split with stratification
+- Cross-validation
+- Optuna hyperparameter tuning
+- Early stopping
+- Model checkpoint saving (.h5)
+- Model versioning
+
+Metrics:
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- ROC-AUC
+- Confusion Matrix
+- FAR
+- FRR
+- EER (Equal Error Rate)
+
+Generate:
+- ROC curve plot
+- Feature importance plot
+- SHAP explanation visualization
+
+──────────────────────────────
+ADVANCED FEATURES
+──────────────────────────────
+
+1) Explainable AI
+- Use SHAP to explain predictions.
+- Store explanation summary per session.
+
+2) Model Drift Detection
+- Compare new behavioral distribution with training baseline.
+- Trigger retraining recommendation.
+
+3) Adversarial Robustness Test
+- Simulate spoofed behavioral patterns.
+- Evaluate model resilience.
+
+4) Continuous Learning Pipeline
+- Store new sessions for retraining dataset.
+- Background retraining service.
+
+──────────────────────────────
+SECURITY REQUIREMENTS
+──────────────────────────────
+
+- Argon2 password hashing
+- JWT with expiration
+- Role-based admin access
+- Rate limiting via Redis
+- Request validation
+- SQL injection protection
+- Production CORS policy
+
+──────────────────────────────
+TESTING REQUIREMENTS
+──────────────────────────────
+
+Include:
+- Simulated stress mode
+- Simulated normal mode
+- Unit tests for feature engineering
+- Integration tests for ML pipeline
+- API endpoint tests
+- Load test script
+
+──────────────────────────────
+OUTPUT REQUIREMENTS
+──────────────────────────────
+
+1) Generate complete working code.
+2) Include requirements.txt.
+3) Include Dockerfile.
+4) Ensure project runs on Replit.
+5) Ensure no simulated placeholder-only architecture.
+6) Provide step-by-step setup instructions.
+7) Use realistic behavioral processing logic.
+8) Include comments explaining architecture decisions.

@@ -1,0 +1,327 @@
+You are building a **real-time behavioral biometric authentication system for a banking login demo**.
+
+The application must capture **live user behavior signals** and analyze them to detect **coercion or stress during login**.
+
+This is NOT a UI demo.
+All signals must come from **actual user interaction in real time**.
+
+---
+
+# SYSTEM NAME
+
+Multimodal Behavioral Biometric Authentication for Secure Banking Login
+
+---
+
+# PRIMARY GOAL
+
+The system must capture and analyze **three behavior sources simultaneously**:
+
+1. Keyboard behavior (keystroke dynamics)
+2. Mouse / trackpad movement behavior
+3. Face behavior from webcam
+
+These signals must update **live while the user interacts with the page**.
+
+---
+
+# USER INTERFACE STRUCTURE
+
+The main page must contain **four clearly separated panels** so the demo user can see behavior capture working.
+
+### Panel 1 — BANK LOGIN PANEL
+
+Create a **realistic banking login card**.
+
+Fields:
+
+Username
+Password
+Remember Me
+Login Button
+
+While typing credentials, the system must capture **keystroke dynamics**.
+
+---
+
+### Panel 2 — KEYBOARD BEHAVIOR CAPTURE PANEL
+
+Create a live keystroke monitoring module.
+
+Capture keyboard events:
+
+keydown
+keyup
+
+From these events calculate:
+
+dwell_time
+flight_time
+inter_key_delay
+typing_speed
+typing_variance
+
+Display these values live in the panel.
+
+Example display:
+
+Typing Speed
+Average Dwell Time
+Flight Time Variance
+Total Keys Pressed
+
+This panel must update **while the user types**.
+
+---
+
+### Panel 3 — MOUSE / TRACKPAD BEHAVIOR PANEL
+
+Create a large **interactive tracking area**.
+
+Inside this area track pointer events:
+
+mousemove
+pointermove
+mousedown
+mouseup
+
+Capture:
+
+cursor_position
+cursor_velocity
+cursor_acceleration
+direction_change_frequency
+jitter_score
+
+Draw the pointer path on a **canvas element** so the movement trail is visible.
+
+Also calculate:
+
+average_mouse_speed
+mouse_stability
+movement_entropy
+
+Display metrics live.
+
+---
+
+### Panel 4 — FACE BEHAVIOR CAPTURE PANEL
+
+Create a webcam section using:
+
+navigator.mediaDevices.getUserMedia
+
+Show live webcam feed.
+
+Run face detection using **TensorFlow.js or MediaPipe**.
+
+Extract behavior features:
+
+eye_blink_rate
+head_movement
+face_orientation
+emotion_probability
+
+Display results live.
+
+Example:
+
+Emotion: Neutral / Stress / Fear
+Blink Rate
+Head Motion Score
+
+Overlay face landmarks on the video.
+
+---
+
+# BEHAVIOR FEATURE PIPELINE
+
+All captured signals must be converted into structured features.
+
+Features include:
+
+typing_speed
+dwell_time
+flight_time
+cursor_speed
+cursor_acceleration
+mouse_jitter
+movement_entropy
+eye_blink_rate
+emotion_stress_score
+reaction_delay
+
+Send these features continuously to the backend API.
+
+---
+
+# MACHINE LEARNING MODULE
+
+Create a backend ML service using Python.
+
+Use:
+
+FastAPI
+scikit-learn
+
+Train models:
+
+RandomForestClassifier
+SVM
+
+Dataset columns:
+
+typing_speed
+dwell_time
+flight_time
+cursor_speed
+cursor_acceleration
+mouse_jitter
+movement_entropy
+eye_blink_rate
+emotion_stress_score
+reaction_delay
+label
+
+Labels:
+
+NORMAL
+DURESS
+
+Save trained model as:
+
+model.pkl
+
+---
+
+# REAL-TIME BEHAVIOR ANALYSIS
+
+The frontend must send behavior features to the backend every few seconds.
+
+The backend must:
+
+load model.pkl
+predict duress probability
+return prediction
+
+---
+
+# RISK SCORING ENGINE
+
+Compute risk score using:
+
+risk_score =
+0.25 × typing_anomaly +
+0.25 × mouse_anomaly +
+0.25 × facial_stress +
+0.25 × ml_probability
+
+Normalize risk score to 0-100.
+
+---
+
+# RISK CLASSIFICATION
+
+risk_score < 30
+Normal login
+
+30 ≤ risk_score < 60
+Suspicious behavior
+
+60 ≤ risk_score < 85
+High risk
+
+risk_score ≥ 85
+Duress detected
+
+---
+
+# SECURITY RESPONSE
+
+If duress detected:
+
+disable banking actions
+show restricted interface
+trigger silent alert
+
+---
+
+# SILENT ALERT SYSTEM
+
+Send alert email to:
+
+[bharathramu35@gmail.com](mailto:bharathramu35@gmail.com)
+
+Include:
+
+username
+timestamp
+risk_score
+emotion
+mouse_score
+typing_score
+ip_address
+
+Use Python smtplib.
+
+This alert must be sent **without notifying the user interface**.
+
+---
+
+# DATASET COLLECTION
+
+Log behavior data into:
+
+dataset.csv
+
+Each row must contain behavioral features and label.
+
+---
+
+# BACKEND STRUCTURE
+
+FastAPI backend must contain modules:
+
+feature_extraction.py
+classifier.py
+risk_engine.py
+email_alert_service.py
+dataset_logger.py
+
+---
+
+# FRONTEND COMPONENTS
+
+Create components:
+
+LoginPanel
+KeyboardBehaviorPanel
+MouseTrackingPanel
+FaceBehaviorPanel
+BehaviorAnalyticsDashboard
+AuthenticationResultPanel
+
+---
+
+# DEMO REQUIREMENT
+
+The system must allow a user to:
+
+type in the login form
+move the mouse on the page while it captures the movements
+show their face on webcam
+
+All three behaviors must update live and feed into the risk scoring system.
+
+---
+
+# OUTPUT
+
+Generate full source code implementing:
+
+real keyboard capture
+real mouse tracking
+real webcam face analysis
+behavior analytics dashboard
+machine learning pipeline
+silent alert system

@@ -1,0 +1,186 @@
+You are implementing a **Security Alert Notification System** for a behavioral biometric banking authentication project.
+
+Your task is to build a **backend module that automatically sends an email alert whenever suspicious or high-risk authentication behavior is detected**.
+
+The alert must trigger when the system classifies a login attempt as **Suspicious Behavior, High Risk Authentication, or Duress Attack**.
+
+---
+
+# OBJECTIVE
+
+Create a **real-time email alert system** that notifies the administrator when abnormal behavior is detected during authentication.
+
+The email must be triggered automatically by the backend.
+
+The user interface must **not show any indication that the alert was sent**.
+
+This is a **silent alert system**.
+
+---
+
+# ALERT TRIGGER CONDITIONS
+
+Send an alert when:
+
+risk_score ≥ 60
+
+or when classification is:
+
+SUSPICIOUS BEHAVIOR
+HIGH RISK AUTHENTICATION
+CONFIRMED DURESS ATTACK
+
+---
+
+# EMAIL RECIPIENT
+
+Send alerts to:
+
+[bharathramu35@gmail.com](mailto:bharathramu35@gmail.com)
+
+---
+
+# EMAIL CONTENT
+
+The alert email must include the following information:
+
+Username
+Timestamp
+Risk Score
+Risk Classification
+Typing Anomaly Score
+Mouse Behavior Score
+Facial Stress Score
+IP Address
+Device Information
+Browser User Agent
+
+---
+
+# EMAIL SUBJECT
+
+SECURITY ALERT: Suspicious Authentication Behavior Detected
+
+---
+
+# EMAIL BODY FORMAT
+
+Example message:
+
+A suspicious authentication attempt has been detected.
+
+User: {username}
+
+Risk Score: {risk_score}
+
+Classification: {risk_level}
+
+Typing Anomaly Score: {typing_score}
+
+Mouse Behavior Score: {mouse_score}
+
+Facial Stress Score: {face_score}
+
+IP Address: {ip_address}
+
+Device: {device_info}
+
+Time: {timestamp}
+
+Immediate investigation is recommended.
+
+---
+
+# IMPLEMENTATION REQUIREMENTS
+
+The backend must implement an email service module.
+
+File name:
+
+email_alert_service.py
+
+Use Python libraries:
+
+smtplib
+email.mime.text
+email.mime.multipart
+
+The service must run asynchronously using FastAPI BackgroundTasks.
+
+---
+
+# ENVIRONMENT VARIABLES
+
+Use environment variables for credentials.
+
+SMTP_SERVER
+
+SMTP_PORT
+
+SMTP_EMAIL
+
+SMTP_PASSWORD
+
+ADMIN_ALERT_EMAIL
+
+Example configuration:
+
+SMTP_SERVER=smtp.gmail.com
+
+SMTP_PORT=587
+
+ADMIN_ALERT_EMAIL=[bharathramu35@gmail.com](mailto:bharathramu35@gmail.com)
+
+---
+
+# EMAIL FUNCTION
+
+Create a function:
+
+send_security_alert(user_data)
+
+This function must:
+
+1. construct the email message
+2. connect to SMTP server
+3. authenticate securely
+4. send the alert email
+5. close the connection
+
+---
+
+# INTEGRATION WITH RISK ENGINE
+
+Whenever the risk scoring engine detects:
+
+risk_score ≥ 60
+
+call:
+
+send_security_alert(user_data)
+
+The alert must run as a **background task** so it does not block the login request.
+
+---
+
+# SECURITY REQUIREMENTS
+
+The email system must:
+
+use TLS encryption
+protect credentials with environment variables
+log alert events in the database
+
+---
+
+# OUTPUT
+
+Generate the complete Python module implementing:
+
+email_alert_service.py
+SMTP configuration
+alert email formatting
+integration with FastAPI background tasks
+example usage inside the authentication pipeline
+
+The module must be production-ready and easy to integrate with the behavioral risk detection engine.
